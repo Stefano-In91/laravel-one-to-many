@@ -26,6 +26,7 @@ class ProjectSeeder extends Seeder
             $new_project->title = $faker->text(50);
             $new_project->description = $faker->text(500);
             $new_project->slug = Str::slug($new_project->title);
+            $new_project->type = rand(1, 5);
             
             $new_project->save();
         }
