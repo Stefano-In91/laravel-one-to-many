@@ -9,8 +9,8 @@ class Project extends Model
 {
     use HasFactory;
 
-    public function projectType() {
-        return $this->hasMany(Type::class);
+    public function type() {
+        return $this->belongsTo(Type::class);
     }
 
     protected $guarded = ['slug'];

@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Faker\Generator as Faker;
 use App\Models\Type;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 
 use Illuminate\Database\Seeder;
 
@@ -16,15 +16,18 @@ class TypeSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
-        for($i = 0; $i < 5; $i++) {
-            $new_type = new Type;
+        Schema::disableForeignKeyConstraints();
+        Type::truncate();
+        Schema::enableForeignKeyConstraints();
 
-            $new_type->type_name = $faker->unique()->word();
-            $new_type->description = $faker->text(500);
-            $new_type->slug = Str::slug($new_type->type_name);
-            
+        $types = ['Frontend', 'Backend', 'Devops', 'AI'];
+
+        foreach( $types as $type ) {
+            $new_type = new Type();
+            $new_type->name = $type;
+            $new_type->slug = Str::slug($new_type->name);
             $new_type->save();
         }
     }
