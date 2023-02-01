@@ -15,5 +15,15 @@
         <h3>Nessun progetto associato</h3>
       @endif
     </div>
+    <a href="{{ route('admin.types.edit', $type) }}"><button
+        class="btn btn-secondary">Modifica</button></a>
+    <form action="{{ route('admin.types.destroy', $type) }}" method="POST" class=" d-inline">
+
+      @csrf
+      @method('DELETE')
+
+      <button type="submit" class="btn btn-danger">Elimina</button>
+
+    </form>
   </div>
 @endsection
